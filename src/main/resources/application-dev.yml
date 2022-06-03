@@ -1,0 +1,27 @@
+spring:
+
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/newke?useUnicode=true&useSSL=false&characterEncoding=utf8&serverTimezone=Asia/Shanghai
+    username: root
+    password: java2021
+
+  thymeleaf:
+    cache: false
+
+  mail:
+    host: smtp.qq.com
+    username: 1317993668@qq.com
+    password: dtmmmllbmwvmhfef
+    default-encoding: UTF-8
+    port: 587
+    properties:
+      mail:
+      smtp:
+      auth: true
+      socketFactory:
+      class: javax.net.ssl.SSLSocketFactory
+
+
+
+
