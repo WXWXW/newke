@@ -22,6 +22,15 @@ spring:
       socketFactory:
       class: javax.net.ssl.SSLSocketFactory
 
+server:
+  servlet:
+    context-path: /community
+
+community:
+  path:
+    domain: http://localhost:8080
+    upload: F:\Java 学习\newke\upload
+
 
 
 

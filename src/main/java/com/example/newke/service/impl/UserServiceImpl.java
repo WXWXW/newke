@@ -1,6 +1,7 @@
 package com.example.newke.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.newke.dao.LoginTricketDao;
 import com.example.newke.dao.UserDao;
@@ -191,6 +192,24 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         LoginTicket login = new LoginTicket();
         login.setTicket(loginTicket);
         loginTricketDao.updateById(login);
+    }
+
+    @Override
+    public int updateHeader(int userId, String headUrl){
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper();
+        updateWrapper.set("header_url",headUrl);
+        updateWrapper.eq("id",userId);
+        int rows = userDao.update(null,updateWrapper);
+
+        return rows;
+    }
+
+    @Override
+    public void updatePassword(Integer id, String aNew) {
+        UpdateWrapper<User> updateWrapper = new UpdateWrapper();
+        updateWrapper.set("password",aNew);
+        updateWrapper.eq("id",id);
+        userDao.update(null,updateWrapper);
     }
 
 
