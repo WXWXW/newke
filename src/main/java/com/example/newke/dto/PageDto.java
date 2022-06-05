@@ -4,7 +4,7 @@ import lombok.Data;
 
 
 @Data
-public class HomePageDto {
+public class PageDto {
 
     private Integer rows;
 

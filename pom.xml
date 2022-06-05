@@ -71,6 +71,16 @@
             <version>2.3.2</version>
         </dependency>
 
+        <!-- 数据处理包 -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+            <version>3.12.0</version>
+        </dependency>
+
+
+
+
 
 
 

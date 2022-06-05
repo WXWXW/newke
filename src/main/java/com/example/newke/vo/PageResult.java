@@ -1,6 +1,5 @@
 package com.example.newke.vo;
 
-import com.example.newke.dto.HomePageDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

@@ -1,8 +1,10 @@
 package com.example.newke.utils;
 
 import com.baomidou.mybatisplus.core.toolkit.StringUtils;
+import org.apache.commons.lang3.CharUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.stereotype.Component;
 
 import javax.annotation.PostConstruct;
 import java.io.BufferedReader;
@@ -12,6 +14,7 @@ import java.io.InputStreamReader;
 import java.util.HashMap;
 import java.util.Map;
 
+@Component
 public class SensitiveUtil {
     private static final Logger LOGGER = LoggerFactory.getLogger(SensitiveUtil.class);
 

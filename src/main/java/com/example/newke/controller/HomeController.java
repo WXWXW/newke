@@ -1,7 +1,6 @@
 package com.example.newke.controller;
 
-import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
-import com.example.newke.dto.HomePageDto;
+import com.example.newke.dto.PageDto;
 import com.example.newke.entity.DiscussPost;
 import com.example.newke.entity.User;
 import com.example.newke.service.DiscussPostService;
@@ -10,10 +9,8 @@ import com.example.newke.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -32,31 +29,23 @@ public class HomeController {
 
 
     @RequestMapping(path = "/index", method = RequestMethod.GET)
-    public String  getIndexPage(Model model, HomePageDto homePageDto){
+    public String  getIndexPage(Model model, PageDto pageDto){
+
+        pageDto.setPath("/index");
+
+        pageDto.setRows(discussPostService.getTotal());
 
 
+        System.out.println(pageDto);
 
-
-
-        homePageDto.setPath("/index");
-
-        homePageDto.setRows(discussPostService.getTotal());
-
-
-        System.out.println(homePageDto);
-
-        PageResult<DiscussPost> discussPostPageResult = discussPostService.listDiscussPost(homePageDto);
+        PageResult<DiscussPost> discussPostPageResult = discussPostService.listDiscussPost(pageDto);
         List<DiscussPost> recordList = discussPostPageResult.getRecordList();
 
         List<Map<String, Object>> discussPosts = new ArrayList<>();
 
-
-
-
         for(DiscussPost post :recordList){
 
             Map<String, Object> map = new HashMap<>();
-
 
             map.put("post", post);
 
@@ -69,13 +58,8 @@ public class HomeController {
         }
 
 
-
-
-
-
-
         model.addAttribute("discussPosts",discussPosts);
-        model.addAttribute("homePageDto",homePageDto);
+        model.addAttribute("pageDto",pageDto);
 
 
 
