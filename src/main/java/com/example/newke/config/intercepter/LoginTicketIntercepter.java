@@ -31,11 +31,17 @@ public class LoginTicketIntercepter implements HandlerInterceptor {
     @Override
     public boolean preHandle(HttpServletRequest request, HttpServletResponse response, Object handler) throws Exception {
         String ticket = CookieUtils.getValue(request, "ticket");
+
+
         if(ticket != null){
             //查询凭证
             QueryWrapper<LoginTicket> wrapper1 = new QueryWrapper<>();
             wrapper1.eq("ticket",ticket);
             LoginTicket loginTicket = loginTricketDao.selectOne(wrapper1);
+
+            if(loginTicket == null){
+                System.out.println("login is null");
+            }
 
             //检查凭证是否有效
             if(loginTicket != null && loginTicket.getStatus() == 0 && loginTicket.getExpired().after(new Date())){

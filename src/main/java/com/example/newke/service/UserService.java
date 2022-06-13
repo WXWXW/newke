@@ -1,5 +1,6 @@
 package com.example.newke.service;
 
+import com.example.newke.entity.Message;
 import com.example.newke.entity.User;
 import org.springframework.stereotype.Service;
 
@@ -21,4 +22,8 @@ public interface UserService {
     int updateHeader(int userId, String headUrl);
 
     void updatePassword(Integer id, String aNew);
+
+    User getUserByName(String username);
+
+    User getUserById(Integer fromId);
 }

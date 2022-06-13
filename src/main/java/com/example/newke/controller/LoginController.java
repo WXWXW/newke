@@ -131,8 +131,7 @@ public class LoginController implements CommunityConstant {
 
         String kaptcha = (String)session.getAttribute("kaptcha");
 
-        System.out.println(code);
-        System.out.println(kaptcha);
+
 
 
         if(StringUtils.isBlank(kaptcha) || StringUtils.isBlank(code) || !kaptcha.equalsIgnoreCase(code)){
@@ -160,7 +159,10 @@ public class LoginController implements CommunityConstant {
 
     @RequestMapping(path = "/logout",method = RequestMethod.GET)
     public String logout(@CookieValue("ticket") String ticket){
+
+        System.out.println(ticket);
         userService.logout(ticket);
+
         return "redirect:/login";
     }
 }

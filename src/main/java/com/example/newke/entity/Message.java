@@ -9,36 +9,31 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-@TableName("comment")
-public class Comment {
+@TableName("message")
+public class Message {
 
     @TableId(value = "id",type = IdType.AUTO)
     private Integer id;
-
-    @TableField("user_id")
-    private Integer userId;
-    @TableField("entity_type")
-    private Integer entityType;
-    @TableField("entity_id")
-    private Integer entityId;
-    @TableField("target_id")
-    private Integer targetId;
+    @TableField("from_id")
+    private Integer fromId;    //1代表系统消息
+    @TableField("to_id")
+    private Integer toId;
+    @TableField("conversation_id")
+    private String conversationId;//会话id
     @TableField("content")
     private String content;
     @TableField("status")
-    private Integer status;
+    private int status;//0 未读 1 已读 2 删除
     @TableField("create_time")
     private Date createTime;
 
-
     @Override
     public String toString() {
-        return "Comment{" +
+        return "Message{" +
                 "id=" + id +
-                ", userId=" + userId +
-                ", entityType=" + entityType +
-                ", entityId=" + entityId +
-                ", targetId=" + targetId +
+                ", fromId=" + fromId +
+                ", toId=" + toId +
+                ", conversationId='" + conversationId + '\'' +
                 ", content='" + content + '\'' +
                 ", status=" + status +
                 ", createTime=" + createTime +

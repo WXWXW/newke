@@ -6,6 +6,7 @@ import com.baomidou.mybatisplus.core.toolkit.StringUtils;
 import com.example.newke.dao.LoginTricketDao;
 import com.example.newke.dao.UserDao;
 import com.example.newke.entity.LoginTicket;
+import com.example.newke.entity.Message;
 import com.example.newke.entity.User;
 import com.example.newke.service.UserService;
 import com.example.newke.utils.CommunityConstant;
@@ -171,7 +172,6 @@ public class UserServiceImpl implements UserService, CommunityConstant {
             return map;
         }
 
-
         LoginTicket loginTicket = new LoginTicket();
         loginTicket.setUserId(user.getId());
         loginTicket.setStatus(0);
@@ -179,9 +179,9 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         loginTicket.setExpired(new Date(System.currentTimeMillis()+expired*1000));  //到期时间
         loginTricketDao.insert(loginTicket);
 
-        map.put("ticket",loginTicket.getTicket());
+        //String ticket = "52a437f2e80140eeb1851a4358f82812";
 
-        System.out.println();
+        map.put("ticket",loginTicket.getTicket());
 
         return map;
 
@@ -189,9 +189,12 @@ public class UserServiceImpl implements UserService, CommunityConstant {
 
     @Override
     public void logout(String loginTicket){
-        LoginTicket login = new LoginTicket();
-        login.setTicket(loginTicket);
-        loginTricketDao.updateById(login);
+
+
+        UpdateWrapper<LoginTicket> updateWrapper = new UpdateWrapper();
+        updateWrapper.set("status",1);
+        updateWrapper.eq("ticket",loginTicket);
+        loginTricketDao.update(null,updateWrapper);
     }
 
     @Override
@@ -210,6 +213,20 @@ public class UserServiceImpl implements UserService, CommunityConstant {
         updateWrapper.set("password",aNew);
         updateWrapper.eq("id",id);
         userDao.update(null,updateWrapper);
+    }
+
+    @Override
+    public User getUserByName(String username) {
+        QueryWrapper<User> queryWrapperWrapper = new QueryWrapper<>();
+        queryWrapperWrapper.eq("username",username);
+        return userDao.selectOne(queryWrapperWrapper);
+    }
+
+    @Override
+    public User getUserById(Integer fromId) {
+        QueryWrapper<User> queryWrapperWrapper = new QueryWrapper<>();
+        queryWrapperWrapper.eq("id",fromId);
+        return userDao.selectOne(queryWrapperWrapper);
     }
 
 

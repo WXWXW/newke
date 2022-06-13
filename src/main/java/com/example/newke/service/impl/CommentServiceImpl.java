@@ -12,18 +12,25 @@ import com.example.newke.entity.Comment;
 import com.example.newke.entity.DiscussPost;
 import com.example.newke.entity.User;
 import com.example.newke.service.CommentService;
+import com.example.newke.service.DiscussPostService;
+import com.example.newke.utils.CommunityConstant;
 import com.example.newke.vo.PageResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service
-public class CommentServiceImpl extends ServiceImpl<CommentDao, Comment> implements CommentService {
+public class CommentServiceImpl extends ServiceImpl<CommentDao, Comment> implements CommentService, CommunityConstant {
 
 
     @Autowired
     private CommentDao commentDao;
+
+
 
     @Override
     public PageResult<Comment> listComment(int entityType, int entityId,PageDto pageDto) {
@@ -58,4 +65,23 @@ public class CommentServiceImpl extends ServiceImpl<CommentDao, Comment> impleme
 
         return rows;
     }
+
+
+    @Override
+    public int insertComment(Comment comment) {
+
+
+        int rows =commentDao.insert(comment);
+
+        return rows;
+    }
+
+
+    @Override
+    public int updateComment(Comment comment) {
+        int rows = commentDao.updateById(comment);
+        return rows;
+    }
+
+
 }

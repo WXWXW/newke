@@ -21,6 +21,11 @@ spring:
       auth: true
       socketFactory:
       class: javax.net.ssl.SSLSocketFactory
+  redis:
+    host: 124.222.9.55
+    port: 6379
+    database: 0
+    password: java2021
 
 server:
   servlet:
@@ -30,6 +35,11 @@ community:
   path:
     domain: http://localhost:8080
     upload: F:\Java 学习\newke\upload
+
+mybatis-plus:
+  mapper-locations: classpath:mapper/*.xml
+
+
 
 
 

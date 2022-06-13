@@ -72,6 +72,8 @@ public class DiscussPostController implements CommunityConstant {
         pageDto.setPath("/discuss/detail/" + discussPostId);
         pageDto.setRows(post.getCommentCount());
 
+        model.addAttribute("page",pageDto);
+
         PageResult<Comment> commentPageResult = commentService.listComment(ENTITY_TYPE_POST, post.getId(), pageDto);
 
         List<Map<String, Object>> commentVoList = new ArrayList<>();
@@ -103,7 +105,7 @@ public class DiscussPostController implements CommunityConstant {
                 commentVoList.add(map);
             }
         }
-
+        model.addAttribute("comments",commentVoList);
         return "/site/discuss-detail";
     }
 }

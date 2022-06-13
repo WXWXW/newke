@@ -2,6 +2,7 @@ package com.example.newke.service.impl;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.baomidou.mybatisplus.core.toolkit.Wrappers;
 import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -75,5 +76,13 @@ public class DiscussPostServiceImpl extends ServiceImpl<DiscussPostDao, DiscussP
 
     public DiscussPost findDiscussPostById(int id){
         return discussPostDao.selectById(id);
+    }
+
+    @Override
+    public int updateCommentCount(int id, int commentCount) {
+        UpdateWrapper<DiscussPost> updateWrapper = new UpdateWrapper();
+        updateWrapper.eq("id",id).set("comment_count",commentCount);
+
+        return discussPostDao.update(null,updateWrapper);
     }
 }

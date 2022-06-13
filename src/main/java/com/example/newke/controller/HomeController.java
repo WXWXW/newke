@@ -36,7 +36,7 @@ public class HomeController {
         pageDto.setRows(discussPostService.getTotal());
 
 
-        System.out.println(pageDto);
+
 
         PageResult<DiscussPost> discussPostPageResult = discussPostService.listDiscussPost(pageDto);
         List<DiscussPost> recordList = discussPostPageResult.getRecordList();
